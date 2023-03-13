@@ -1,0 +1,44 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"schema_par": {
+				"type": "string",
+				"defaultValue": "SalesLT"
+			},
+			"table_name_par": {
+				"type": "string",
+				"defaultValue": "Customer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-03-13T22:23:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

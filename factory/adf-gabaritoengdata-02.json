@@ -1,0 +1,9 @@
+{
+	"name": "adf-gabaritoengdata-02",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e33308d6-0b54-40f2-a1c2-860d9d002a0b",
+		"tenantId": "b05c1f2b-49fc-4897-b27c-e67ae75af310"
+	}
+}
