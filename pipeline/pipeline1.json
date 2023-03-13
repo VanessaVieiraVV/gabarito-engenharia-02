@@ -22,7 +22,11 @@
 					},
 					"dataset": {
 						"referenceName": "AzureSqlTable",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_schema_table": "Customer",
+							"ds_name_table": "SalesLT"
+						}
 					}
 				}
 			}
