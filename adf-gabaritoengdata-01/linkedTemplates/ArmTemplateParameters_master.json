@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-gabaritoengdata-01"
+		},
+		"SqlServer_connectionString": {
+			"value": ""
+		},
+		"ls_AzureSqlDatabase_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=singledatabase.database.windows.net;Initial Catalog=db-gabaritoengdata-01;User ID=desafioengdata"
+		},
+		"ls_AzureSqlDatabase02_connectionString": {
+			"value": ""
+		},
+		"lsAzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://kvgabaritoengdata01.vault.azure.net/"
+		},
+		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://lrsstoragegabarito01.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

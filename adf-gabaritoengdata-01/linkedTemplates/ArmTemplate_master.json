@@ -1,0 +1,78 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-gabaritoengdata-01"
+		},
+		"SqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer'"
+		},
+		"ls_AzureSqlDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_AzureSqlDatabase'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=singledatabase.database.windows.net;Initial Catalog=db-gabaritoengdata-01;User ID=desafioengdata"
+		},
+		"ls_AzureSqlDatabase02_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_AzureSqlDatabase02'"
+		},
+		"lsAzureKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvgabaritoengdata01.vault.azure.net/"
+		},
+		"ls_AzureDataLakeStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://lrsstoragegabarito01.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf-gabaritoengdata-01_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SqlServer_connectionString": {
+						"value": "[parameters('SqlServer_connectionString')]"
+					},
+					"ls_AzureSqlDatabase02_connectionString": {
+						"value": "[parameters('ls_AzureSqlDatabase02_connectionString')]"
+					},
+					"ls_AzureSqlDatabase_connectionString": {
+						"value": "[parameters('ls_AzureSqlDatabase_connectionString')]"
+					},
+					"lsAzureKeyVault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('lsAzureKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"ls_AzureDataLakeStorage_properties_typeProperties_url": {
+						"value": "[parameters('ls_AzureDataLakeStorage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
