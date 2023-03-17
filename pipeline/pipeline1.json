@@ -3,9 +3,26 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
-				"type": "Lookup",
+				"name": "Set variable1",
+				"type": "SetVariable",
 				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "teste",
+					"value": "testando"
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -17,32 +34,64 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select * from SalesLT.Customer",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"dataset": {
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
 						"referenceName": "AzureSqlTable",
 						"type": "DatasetReference",
 						"parameters": {
-							"ds_schema_table": "Customer",
-							"ds_name_table": "SalesLT"
+							"ds_schema_table": "SalesLT",
+							"ds_name_table": "Customer"
 						}
 					}
-				}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_container": "landing",
+							"ds_directory": "AdventureWorks"
+						}
+					}
+				]
 			}
 		],
-		"parameters": {
-			"schema_par": {
-				"type": "string",
-				"defaultValue": "SalesLT"
+		"variables": {
+			"teste": {
+				"type": "String"
 			},
-			"table_name_par": {
-				"type": "string",
-				"defaultValue": "Customer"
+			"last_modified": {
+				"type": "String"
+			},
+			"max_writed_value": {
+				"type": "String"
 			}
 		},
 		"annotations": [],
-		"lastPublishTime": "2023-03-13T22:23:31Z"
+		"lastPublishTime": "2023-03-17T14:56:18Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

@@ -8,11 +8,11 @@
 		"parameters": {
 			"ds_schema_table": {
 				"type": "string",
-				"defaultValue": "Customer"
+				"defaultValue": "SalesLT"
 			},
 			"ds_name_table": {
 				"type": "string",
-				"defaultValue": "SalesLT"
+				"defaultValue": "Customer"
 			}
 		},
 		"annotations": [],
